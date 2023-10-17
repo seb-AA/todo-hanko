@@ -5,8 +5,6 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Hanko, register } from "@teamhanko/hanko-elements";
 
-const hankoApi = "https://d8db021b-5052-4b12-a0ed-a372e35a8c50.hanko.io";
-
 export default function Login() {
   const router = useRouter();
   const [hanko, setHanko] = useState<Hanko>();
@@ -26,12 +24,12 @@ export default function Login() {
   };
 
   const redirectAfterLogin = useCallback(() => {
-    router.replace("/todos");
+    router.replace(`${process.env.NEXT_PUBLIC_HANKO_AFTER_SIGN_IN_URL}`);
   }, [router]);
 
   useEffect(() => {
     //
-    register(hankoApi ?? "")
+    register(process.env.NEXT_PUBLIC_HANKO_API_URL ?? "")
       .then(({ hanko }) => {
         setHanko(hanko);
       })
@@ -51,8 +49,8 @@ export default function Login() {
   }, [hanko, redirectAfterLogin]);
 
   return (
-    <div className="flex min-h-screen justify-center items-center bg-slate-50">
-      <div className="bg-white p-5 rounded-2xl shadow-md">
+    <div className="flex min-h-screen justify-center items-center bg-gray-900">
+      <div className="bg-gray-50 p-5 rounded-2xl shadow-md">
         <hanko-auth />
       </div>
     </div>

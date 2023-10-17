@@ -5,15 +5,13 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Hanko } from "@teamhanko/hanko-elements";
 
-const hankoApi = "https://d8db021b-5052-4b12-a0ed-a372e35a8c50.hanko.io";
-
 export const Logout = () => {
   const router = useRouter();
   const [hanko, setHanko] = useState<Hanko>();
 
   useEffect(() => {
     import("@teamhanko/hanko-elements").then(({ Hanko }) =>
-      setHanko(new Hanko(hankoApi ?? ""))
+      setHanko(new Hanko(process.env.NEXT_PUBLIC_HANKO_API_URL ?? ""))
     );
   }, []);
 

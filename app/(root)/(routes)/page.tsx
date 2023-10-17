@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Hanko } from "@teamhanko/hanko-elements";
 
-const Account = () => {
+const RootPage = () => {
   const [hanko, setHanko] = useState<Hanko>();
 
   useEffect(() => {
@@ -17,13 +17,6 @@ const Account = () => {
       });
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      const user = await hanko?.user.getCurrent();
-      console.log(user);
-    })();
-  }, [hanko]);
-
-  return <div>Hello </div>;
+  return <div>RootPage</div>;
 };
-export default Account;
+export default RootPage;

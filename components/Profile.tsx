@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 
 import { register } from "@teamhanko/hanko-elements";
 
-const hankoApi = "https://d8db021b-5052-4b12-a0ed-a372e35a8c50.hanko.io";
-
 export const Profile = () => {
   const [openState, setOpenState] = useState(false);
 
   useEffect(() => {
-    register(hankoApi ?? "").catch((error) => {
+    register(process.env.NEXT_PUBLIC_HANKO_API_URL ?? "").catch((error) => {
       console.log(error);
     });
   }, []);
