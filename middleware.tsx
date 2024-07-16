@@ -6,6 +6,10 @@ const hankoApi = "YOUR_HANKO_API_URL";
 export default async function middleware(req: NextRequest) {
   const token = req.cookies.get("hanko")?.value;
 
+  if (!token) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
   const JWKS = jose.createRemoteJWKSet(new URL(`${hankoApi}/.well-known/jwks.json`));
 
   try {
