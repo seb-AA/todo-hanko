@@ -1,7 +1,11 @@
 import * as jose from "jose";
 import { NextRequest, NextResponse } from "next/server";
 
-const hankoApi = "YOUR_HANKO_API_URL";
+const hankoApi = process.env.NEXT_PUBLIC_HANKO_API_URL;
+
+if (!hankoApi) {
+  throw new Error("HANKO_API_URL is not defined");
+}
 
 export default async function middleware(req: NextRequest) {
   const token = req.cookies.get("hanko")?.value;
