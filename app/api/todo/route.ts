@@ -3,14 +3,15 @@ import { prisma } from "@/db";
 import * as jose from "jose";
 import { cookies } from "next/headers";
 
-export async function userId() {
+async function getUserId() {
   const token = cookies().get("hanko")?.value;
-  const payload = jose.decodeJwt(token ?? "");
-  return payload.sub;
+  if (!token) throw new Error("Token not found");
+  const payload = jose.decodeJwt(token);
+  return payload.sub as string;
 }
 
 export async function POST(req: Request) {
-  const userID = await userId();
+  const userID = await getUserId();
   const { title } = await req.json();
 
   if (userID) {
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
       throw new Error("That can't be a title");
     }
     await prisma.todo.create({
-      data: { title, complete: false, userId: userID ?? "" },
+      data: { title, complete: false, userId: userID },
     });
 
     return NextResponse.json({ message: "Created Todo" }, { status: 200 });

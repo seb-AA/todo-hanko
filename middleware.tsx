@@ -1,7 +1,7 @@
 import * as jose from "jose";
 import { NextRequest, NextResponse } from "next/server";
 
-const hankoApi = "https://901671a5-333e-4022-84d9-6ba3a4e1d8ea.hanko.io";
+const hankoApi = "YOUR_HANKO_API_URL";
 
 export default async function middleware(req: NextRequest) {
   const token = req.cookies.get("hanko")?.value;
