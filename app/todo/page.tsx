@@ -3,14 +3,14 @@ import { Profile } from "../components/Profile";
 import { NewTodo } from "../components/todos/NewTodo";
 import { TodoItem } from "../components/todos/TodoItem";
 import { prisma } from "@/db";
-import { userId } from "../api/todo/route";
+import { getUserId } from "../utils/auth";
 
 export default async function Todo() {
-  const userID = await userId();
+  const userID = await getUserId();
 
   const todos = await prisma.todo.findMany({
     where: {
-      userId: { equals: userID },
+      userId: userID,
     },
   });
 

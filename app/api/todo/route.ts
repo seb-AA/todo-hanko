@@ -1,14 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/db";
-import * as jose from "jose";
-import { cookies } from "next/headers";
-
-async function getUserId() {
-  const token = cookies().get("hanko")?.value;
-  if (!token) throw new Error("Token not found");
-  const payload = jose.decodeJwt(token);
-  return payload.sub as string;
-}
+import { getUserId } from "../../utils/auth";
 
 export async function POST(req: Request) {
   const userID = await getUserId();
