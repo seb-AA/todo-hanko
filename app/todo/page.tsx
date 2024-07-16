@@ -1,7 +1,7 @@
-import { Logout } from "@/components/Logout";
-import { Profile } from "@/components/Profile";
-import { NewTodo } from "@/components/todos/NewTodo";
-import { TodoItem } from "@/components/todos/TodoItem";
+import { Logout } from "../components/Logout";
+import { Profile } from "../components/Profile";
+import { NewTodo } from "../components/todos/NewTodo";
+import { TodoItem } from "../components/todos/TodoItem";
 import { prisma } from "@/db";
 import { userId } from "../api/todo/route";
 
